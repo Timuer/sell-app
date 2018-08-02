@@ -18,6 +18,7 @@ export default {
     data: function () {
         return {
             seller: {},
+            goods: {},
             tabs: [
                 {id: 0, title: '商品', path: '/goods'},
                 {id: 1, title: '评论', path: '/comments'},
@@ -30,6 +31,7 @@ export default {
         ajax('GET', '/data.json', null, function (responseText) {
             let obj = JSON.parse(responseText)
             self.seller = obj.seller
+            self.goods = obj.goods
         })
     },
     components: {
