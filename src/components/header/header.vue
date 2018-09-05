@@ -30,40 +30,42 @@
         <div class="background">
             <img :src="seller.avatar" width="100%" height="100%">
         </div>
-        <div class="detail" v-show="isShowDetail">
-            <div class="detail-wrapper">
-                <div class="detail-main">
-                    <h1 class="name">{{seller.name}}</h1>
-                    <div class="star-wrapper">
-                        <star :size="48" :score="seller.score"></star>
-                    </div>
-                    <div class="title">
-                        <div class="line"></div>
-                        <div class="text">优惠信息</div>
-                        <div class="line"></div>
-                    </div>
-                    <ul class="supports" v-if="seller.supports">
-                        <li class="support-item" v-for="(support, index) in seller.supports" :key="index">
-                            <i class="icon" :class="classMap[support.type]"></i>
-                            <span class="text">{{support.description}}</span>
-                        </li>
-                    </ul>
-                    <div class="title">
-                        <div class="line"></div>
-                        <div class="text">商家公告</div>
-                        <div class="line"></div>
-                    </div>
-                    <div class="bulletin">
-                        <div class="content">
-                            {{seller.bulletin}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="detail-close">
-                <span class="icon-close" @click="hideDetail"></span>
-            </div>
-        </div>
+        <transition name="fade">
+          <div class="detail" v-show="isShowDetail">
+              <div class="detail-wrapper">
+                  <div class="detail-main">
+                      <h1 class="name">{{seller.name}}</h1>
+                      <div class="star-wrapper">
+                          <star :size="48" :score="seller.score"></star>
+                      </div>
+                      <div class="title">
+                          <div class="line"></div>
+                          <div class="text">优惠信息</div>
+                          <div class="line"></div>
+                      </div>
+                      <ul class="supports" v-if="seller.supports">
+                          <li class="support-item" v-for="(support, index) in seller.supports" :key="index">
+                              <i class="icon" :class="classMap[support.type]"></i>
+                              <span class="text">{{support.description}}</span>
+                          </li>
+                      </ul>
+                      <div class="title">
+                          <div class="line"></div>
+                          <div class="text">商家公告</div>
+                          <div class="line"></div>
+                      </div>
+                      <div class="bulletin">
+                          <div class="content">
+                              {{seller.bulletin}}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="detail-close">
+                  <span class="icon-close" @click="hideDetail"></span>
+              </div>
+          </div>
+        </transition>
     </div>
 </template>
 
@@ -164,7 +166,6 @@
                         font-size: 10px
                         line-height: 12px
                         font-weight: 200
-
             .support-count
                 position: absolute
                 height: 24px
@@ -223,6 +224,10 @@
             z-index: 100
             overflow: auto
             background: rgba(7, 17, 27, 0.8)
+            &.fade-enter, &.fade-leave-to
+              opacity 0
+            &.fade-enter-active, &.fade-leave-active
+              transition opacity 0.3s ease
             .detail-wrapper
                 min-height: 100%
                 text-align: center

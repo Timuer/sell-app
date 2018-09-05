@@ -6,7 +6,7 @@
                 <router-link v-bind:to='t.path'>{{ t.title }}</router-link>
             </div>
         </div>
-        <router-view></router-view>
+        <router-view :goods="goods" :seller="seller" keep-alive></router-view>
     </div>
 </template>
 
@@ -27,11 +27,10 @@ export default {
         }
     },
     created () {
-        let self = this
-        ajax('GET', '/data.json', null, function (responseText) {
+        ajax('GET', '/data.json', null, (responseText) => {
             let obj = JSON.parse(responseText)
-            self.seller = obj.seller
-            self.goods = obj.goods
+            this.seller = obj.seller
+            this.goods = obj.goods
         })
     },
     components: {

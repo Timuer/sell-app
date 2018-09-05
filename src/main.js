@@ -10,6 +10,7 @@ import './common/stylus/index.styl'
 Vue.use(VueRouter)
 
 const routes = [
+    {path: '/', redirect: '/goods'},
     {path: '/goods', component: goods},
     {path: '/comments', component: comments},
     {path: '/stores', component: stores}
